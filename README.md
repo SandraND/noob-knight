@@ -1,16 +1,14 @@
 # Noob Knight
 	
-##  What to use
+##  Tech
 
 	Canvas
 
-## About
+## Description
 
-
-El héroe tiene que conseguir puntos matando a los enemigos.
-Cada X puntos positivos aparecerá un cofre en el mapa con mejoras para el héroe. Cada X puntos negativos el héroe pierde mejoras. 
-Si no tiene mejoras, perderá fuerza.
-
+The Hero needs to get points killing enemies.
+For each X positive points a chest will apear in the map, containing a special item for the Hero. For each X negative points the hero will lose that special items.
+If the Hero desn't have any special item, will lose life points.
 
 ## Game states 
 
@@ -22,13 +20,24 @@ Si no tiene mejoras, perderá fuerza.
 ## MVP
 
 - Game screens. 
-- Movimiento del héroe y de los enemigos.
-- Los enemigos desaparecen cuando su vida llega a 0.
-- El héroe muere cuando su vida llega a 0.
+- Hero movement and enemy movement. 
+- Enemies will disappear when it's life reach 0. 
+- Hero will die when it's life reach 0. 
 
 ## Backlog
 
-### Data structures
+- Help: Game instructions. 
+- Buttons: Buttons to turn off sound and pause game. 
+- Bonus items: Hero will recieve items from the chests. 
+- Losing Bonuses: Make Hero lose items when touching an enemy, if Hero doesn't have items, will lose life. 
+- Sound efects: Sound for when hero or enemy dies. 
+- Sound: Sound for the game and Game Over Screen. 
+- Sprites: Movement of Hero when hits. 
+- Life: Put on life img in screen. 
+- Mejoras del héroe: Put on items img that Hero got, in screen.
+- Win: Player wins when Hero get X items or when X enemies are killed. 
+
+## Data structures
 
 - main.js
   - buildSplash()
@@ -72,7 +81,7 @@ Si no tiene mejoras, perderá fuerza.
 - itemsClassjs
   - enerateItems()
 
-### State transitions
+## State transitions
 
 - buildSplash()
 - destroySplash()
@@ -87,31 +96,17 @@ Si no tiene mejoras, perderá fuerza.
 ## TODO
 
 - Task 1: Game states.
-- Task 2: Hacer que el héroe se mueva en el mapa.
-- Task 2: Hacer que los enemigos aparezcan en el mapa.
-- Task 3: Hacer que los enemigos se muevan.(Decidir si van a perseguir al héroe o tendrán movimiento predefinido)
-- Task 4: Hacer que aparezcan los cofres.
-- Task 5: Hacer que el héroe pueda golpear a los enemigos.
-- Task 6: Hacer que los enemigos pierdan vida si el héroe los golpea.
-- Task 7: Hacer que los enemigos mueran si su vida llega a zero.
-- Task 8: Hacer que el héroe pierda vida si toca un enemigo.
-- Task 9: Hacer que el héroe muera si se queda sin vida.
-- Task 10: Hacer que el héroe pueda coger los cofres.
-- Task 11: Game over cuando el héroe muere X veces.
-
-
-## Wishlist
-
-- Help: Instrucciones del juego.
-- Buttons: Botones para apagar el sonido y pausar el juego.
-- Bonus items: El héroe recibe bonus de los cofres.
-- Losing Bonuses: Hacer que el héroe pierda bonus al tocar a enemigos, si no tiene bonus pierde vida.
-- Sound efects: Sonido cuando el héroe o un enemigo mueren.
-- Sound: Sonido para el juego y la Game Over Screen.
-- Sprites: Movimiento del héroe al pegar.
-- Life: Poner imagen de las vidas en la pantalla.
-- Mejoras del héroe: Poner imagen de las mejoras que haya conseguido el héroe con los cofres.
-- Win: El jugador gana cuando el héroe llega a X mejoras o cuando ha matado a X enemigos.
+- Task 2: Make Hero move in the map. 
+- Task 2: Make enemies appear in the map. 
+- Task 3: Make enemies move in the map. (Decide if they will pursue the Hero or they will have defined movement)
+- Task 4: Make chests appear in the map. 
+- Task 5: Make Hero can hit the enemies. 
+- Task 6: Make enemies lose life when Hero hits them. 
+- Task 7: Make enemies die when life reach 0. 
+- Task 8: Make Hero lose life if he touches an enemy. 
+- Task 9: Make Hero die if life reaches 0. 
+- Task 10: Make Hero can take items from chests. 
+- Task 11: Game Over when Hero dies X number of times. 
 
 ## Trello 
 
@@ -122,8 +117,8 @@ Si no tiene mejoras, perderá fuerza.
 
 ## Instructions
 
-El jugador tiene que mover al héroe a través de los enemigos, o matarlos, para llegar a los tesoros y conseguir
-objetos. Cuando el héroe pierde cierto número de vidas se acaba el juego. Para completar el juego el jugador tiene
-que conseguir un número de objetos, o matar a cierto número de enemigos.
+Player needs to move the Hero through the enemies, or kill them, to get to the chests and get items. 
+When Hero lose a number of lifes, dies, and the game ends. 
+To complete the game, the player needs to achieve a number of items, or kill a number of enemies. 
 
 
