@@ -34,7 +34,7 @@ If the Hero desn't have any special item, will lose life points.
 - Sound: Sound for the game and Game Over Screen. 
 - Sprites: Movement of Hero when hits. 
 - Life: Put on life img in screen. 
-- Mejoras del héroe: Put on items img that Hero got, in screen.
+- Hero upgrade: Put on items img that Hero got, in screen.
 - Win: Player wins when Hero get X items or when X enemies are killed. 
 
 ## Data structures
