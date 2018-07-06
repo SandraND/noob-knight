@@ -78,20 +78,17 @@ If the Hero desn't have any special item, will lose life points.
 - treasureClass.js
   - hasBeenTaked()
   
-- itemsClassjs
-  - enerateItems()
+- itemsClass.js
+  - generateItems()
 
 ## State transitions
 
-- buildSplash()
-- destroySplash()
-- buildGame()
-- destroyGame()
-- buildGameOver()
-- buildGameWin()
-- destroyGameOver()
-- destroyGameWin()
-- buildSplash()
+- buildSplash() -> destroySplash()
+                     |-> buildGame() -> destroyGame()
+		                          	|-> buildGameOver() -> destroyGameOver() ->| buildSplash()
+					  	|-> buildGameWin() -> destroyGameWin()   ->| buildSplash()
+					  
+
 
 ## TODO
 
