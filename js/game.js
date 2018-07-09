@@ -1,8 +1,8 @@
 function Game(options){
     this.player = options.player;
     this.enemy = options.enemy;
-    this.item = undefined;
-    this.treasure = undefined;
+    //this.item = undefined;
+    //this.treasure = undefined;
 
     this.rows = options.rows;
     this.columns = options.columns;
@@ -19,11 +19,15 @@ Game.prototype._drawBoard = function(){
 }
 
 Game.prototype._drawPlayer = function(){
-    this.ctx.fillStyle = 'red';
-    this.ctx.fillRect(this.columns*15, this.rows*8, 48, 48)
+    this.ctx.fillStyle = 'green';
+    this.ctx.fillRect(this.player.positionX, this.player.positionY, 48, 48);
 }
 
+
+
 Game.prototype.start = function(){
+    this._assignControlsToKeys();
+    
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
 
 }
@@ -32,4 +36,25 @@ Game.prototype._update = function(){
     this._drawBoard();
     this._drawPlayer();
 
+    this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
+
+}
+
+Game.prototype._assignControlsToKeys = function(){
+    document.onkeydown = function(e){
+        switch(e.keyCode){
+            case 38: //arrow up
+                this.player.goUp();
+                break;
+            case 40: //arror down
+                this.player.goDown();
+                break;
+            case 37: //arror left
+                this.player.goLeft();
+                break;
+            case 39: //arrow right
+                this.player.goRight();
+                break;
+        }
+    }.bind(this);
 }

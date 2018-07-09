@@ -5,6 +5,20 @@ function main(){
     var canvas = document.createElement('canvas');
     var restartButton = document.createElement('button');
     var subTitle = document.createElement('button');
+    var game;
+    var ctx = canvas.getContext("2d");
+
+
+    game = new Game({
+        rows: canvas.width / 10,
+        columns: canvas.height / 10,
+        ctx: ctx,
+        player:  new Player(),
+        enemy: new Enemy(),
+
+    });
+
+
 
     /* Create home screen canvas with start button */
     function buildSplash() {
@@ -42,18 +56,17 @@ function main(){
 
         section.appendChild(canvas);
 
-        var ctx = canvas.getContext("2d");
-
-        ctx.font = "50px Impact"
-        ctx.fillStyle = "#0099CC";
-        ctx.textAlign = "center";
-        ctx.fillText("Noob Knight", canvas.width/2, canvas.height/2);
+        //ctx.font = "50px Impact"
+        //ctx.fillStyle = "#0099CC";
+        //ctx.textAlign = "center";
+        //ctx.fillText("Noob Knight", canvas.width/2, canvas.height/2);
 
         // div.appendChild(canvas);
         document.body.prepend(section);
 
         //Test
         eventKeys();
+        game.start();
         
     }
 
