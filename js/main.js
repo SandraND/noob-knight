@@ -13,9 +13,6 @@ function main(){
         rows: canvas.width / 10,
         columns: canvas.height / 10,
         ctx: ctx,
-        player:  new Player(),
-        enemy: new Enemy(),
-
     });
 
 

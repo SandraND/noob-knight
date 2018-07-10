@@ -2,7 +2,9 @@ function Player(){
     this.positionX = 250;
     this.positionY = 250;
     this.direction = 'up';
+    this.life = 100;
 }
+
 Player.prototype.move = function(){
     switch(this.direction){
         case 'up':
@@ -19,6 +21,8 @@ Player.prototype.move = function(){
             break;
     }
 }
+
+
 
 
 Player.prototype.goUp = function(){
