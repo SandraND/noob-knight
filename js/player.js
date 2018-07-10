@@ -3,7 +3,7 @@ function Player(){
     this.positionY = 250;
     this.size = 48;
     this.direction = 'up';
-    //this.life = 100;
+    this.life = 100;
 
     
     this.playerLeft = this.positionX;

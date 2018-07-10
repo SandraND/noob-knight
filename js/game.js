@@ -23,7 +23,8 @@ Game.prototype._drawBoard = function(){
 Game.prototype._drawScore = function(){
     this.ctx.font = "italic 30pt Calibri";
     this.ctx.fillStyle = "black";
-    this.ctx.fillText("Score: ", 50, 50);
+    this.ctx.fillText(`Score: ${this.score}`, 50, 50);
+    //this.ctx.fillText(`Life: ${this.player.life}`, 200, 50)
     this.ctx.fillStyle = "white";
 }
 
@@ -65,20 +66,28 @@ Game.prototype.collision = function(){
             && this.player.positionX <= (enemy.positionX + enemy.size)
             && this.player.positionY >= enemy.positionY
             && this.player.positionY <= (enemy.positionY + enemy.size)){
-                console.log(this.score -= 1);
-                console.log("esquina superior izquierda");
+            if(!enemy.collisionBolean){
+                enemy.collisionBolean = true;
+                this.score--;
+                //this.player.life -= 20;
+            }
+
+            console.log("esquina superior izquierda");
 
         }
         if((this.player.positionX + this.player.size) >= enemy.positionX 
             && (this.player.positionX + this.player.size) <= (enemy.positionX + enemy.size)
             && (this.player.positionY + this.player.size) >= enemy.positionY
             && (this.player.positionY + this.player.size) <= (enemy.positionY + enemy.size)){
-                console.log(this.score -= 1);
-                console.log("esquina superior derecha");
 
-        }
-        
-    }.bind(this));
+                console.log("esquina superior derecha");
+            if(!enemy.collisionBolean){
+                enemy.collisionBolean = true;
+                this.score--;
+                //this.player.life -= 20;
+            }
+        }  
+    }.bind(this));  
 }
 
 
@@ -88,15 +97,14 @@ Game.prototype._update = function(){
     this._drawPlayer();
     this._drawEnemy();
     this._drawScore();
-
     this.collision();
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
 
-    /*
+    
     if(!this.player.hasDied){
         this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
     }
-*/
+
 }
 
 Game.prototype._assignControlsToKeys = function(){

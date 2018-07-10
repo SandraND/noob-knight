@@ -10,6 +10,9 @@ function Enemy(){
     this.enemyTop = this.positionY;
     this.enemyBottom = this.positionY += this.size;
 
+    this.collisionBolean = false;
+
+
     this._spawnEnemy();
 }
 
