@@ -12,10 +12,19 @@ function Game(options){
 Game.prototype._drawBoard = function(){
     for(var columnIndex = 0; columnIndex < this.columns; columnIndex++){
         for(var rowIndex = 0; rowIndex < this.rows; rowIndex++){
-            this.ctx.fillStyle = '#0099CC';
-            this.ctx.fillRect(columnIndex * 50, rowIndex * 50, 48, 48);
+            this.ctx.fillRect(columnIndex * 50, rowIndex * 50, 50, 50);
+            this.ctx.fillStyle = 'white';
+
         }
     }
+
+}
+
+Game.prototype._drawScore = function(){
+    this.ctx.font = "italic 30pt Calibri";
+    this.ctx.fillStyle = "black";
+    this.ctx.fillText("Score: ", 50, 50);
+    this.ctx.fillStyle = "white";
 }
 
 Game.prototype._drawPlayer = function(){
@@ -50,7 +59,7 @@ Game.prototype.start = function(){
 
 
 Game.prototype.collision = function(){
-    console.log("hola")
+
     this.enemies.forEach(function(enemy){
         if(this.player.positionX >= enemy.positionX 
             && this.player.positionX <= (enemy.positionX + enemy.size)
@@ -74,10 +83,12 @@ Game.prototype.collision = function(){
 
 
 Game.prototype._update = function(){
+
     this._drawBoard();
     this._drawPlayer();
     this._drawEnemy();
-    
+    this._drawScore();
+
     this.collision();
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
 

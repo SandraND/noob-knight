@@ -43,7 +43,8 @@ function main(){
 
     /* Create game screen */
     function buildGame(){ 
-        var section = document.createElement('section')
+        var section = document.createElement('section');
+
         section.setAttribute("id", "section-game");
         
         canvas.id = "game-screen";
@@ -51,14 +52,10 @@ function main(){
         canvas.height = 500;
         canvas.style.border= "1px solid";
 
+        //ctx.font = "italic 30pt Calibri";
+        //ctx.fillText("Score: ", 100, 100);
+
         section.appendChild(canvas);
-
-        //ctx.font = "50px Impact"
-        //ctx.fillStyle = "#0099CC";
-        //ctx.textAlign = "center";
-        //ctx.fillText("Noob Knight", canvas.width/2, canvas.height/2);
-
-        // div.appendChild(canvas);
         document.body.prepend(section);
 
         //Test
