@@ -1,13 +1,12 @@
 function Game(options){
     //this.item = undefined;
     //this.treasure = undefined;
-    // this.enemy = new Enemy(),
     this.enemies = [];
     this.player = new Player(),
     this.rows = options.rows;
     this.columns = options.columns;
     this.ctx = options.ctx;
-    this.score = options.score;
+    this.score = 0;
 }
 
 Game.prototype._drawBoard = function(){
@@ -43,20 +42,50 @@ Game.prototype._generateEnemies = function(){
 Game.prototype.start = function(){
     this._assignControlsToKeys();
 
-    //this._generateEnemies();
-
     this.intervalEnemies = window.setInterval(this._generateEnemies.bind(this), 1000);
     
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
+
 }
+
+
+Game.prototype.collision = function(){
+    console.log("hola")
+    this.enemies.forEach(function(enemy){
+        if(this.player.positionX >= enemy.positionX 
+            && this.player.positionX <= (enemy.positionX + enemy.size)
+            && this.player.positionY >= enemy.positionY
+            && this.player.positionY <= (enemy.positionY + enemy.size)){
+                console.log(this.score -= 1);
+                console.log("esquina superior izquierda");
+
+        }
+        if((this.player.positionX + this.player.size) >= enemy.positionX 
+            && (this.player.positionX + this.player.size) <= (enemy.positionX + enemy.size)
+            && (this.player.positionY + this.player.size) >= enemy.positionY
+            && (this.player.positionY + this.player.size) <= (enemy.positionY + enemy.size)){
+                console.log(this.score -= 1);
+                console.log("esquina superior derecha");
+
+        }
+        
+    }.bind(this));
+}
+
 
 Game.prototype._update = function(){
     this._drawBoard();
     this._drawPlayer();
     this._drawEnemy();
-
+    
+    this.collision();
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
 
+    /*
+    if(!this.player.hasDied){
+        this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
+    }
+*/
 }
 
 Game.prototype._assignControlsToKeys = function(){

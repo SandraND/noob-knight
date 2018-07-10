@@ -3,6 +3,12 @@ function Enemy(){
     this.positionY = 0,
     this.intervalID = undefined;
     this.life = 100;
+    this.size = 48;
+
+    this.enemyLeft = this.positionX;
+    this.enemyRight = this.positionX += this.size;
+    this.enemyTop = this.positionY;
+    this.enemyBottom = this.positionY += this.size;
 
     this._spawnEnemy();
 }

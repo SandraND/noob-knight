@@ -1,8 +1,16 @@
 function Player(){
     this.positionX = 250;
     this.positionY = 250;
+    this.size = 48;
     this.direction = 'up';
-    this.life = 100;
+    //this.life = 100;
+
+    
+    this.playerLeft = this.positionX;
+    this.playerRight = this.positionX += this.size;
+    this.playerTop = this.positionY;
+    this.playerBottom = this.positionY += this.size;
+
 }
 
 Player.prototype.move = function(){
@@ -22,22 +30,28 @@ Player.prototype.move = function(){
     }
 }
 
-
-
+/*
+Player.prototype.hasDied = function(){
+    if(this.life <= 0){
+        return true;
+    }
+}
+*/
 
 Player.prototype.goUp = function(){
-    this.positionY == this.positionY --;
+    this.positionY = this.positionY - 3;
+    
 }
 
 Player.prototype.goDown = function(){
-    this.positionY == this.positionY++;
+    this.positionY = this.positionY + 3;
 
 }
 
 Player.prototype.goLeft = function(){
-    this.positionX == this.positionX--;
+    this.positionX = this.positionX - 3;
 }
 
 Player.prototype.goRight = function(){
-    this.positionX == this.positionX++;
+    this.positionX = this.positionX + 3;
 }
