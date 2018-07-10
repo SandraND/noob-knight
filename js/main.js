@@ -52,9 +52,6 @@ function main(){
         canvas.height = 500;
         canvas.style.border= "1px solid";
 
-        //ctx.font = "italic 30pt Calibri";
-        //ctx.fillText("Score: ", 100, 100);
-
         section.appendChild(canvas);
         document.body.prepend(section);
 
