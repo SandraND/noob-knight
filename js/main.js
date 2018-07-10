@@ -5,6 +5,21 @@ function main(){
     var canvas = document.createElement('canvas');
     var restartButton = document.createElement('button');
     var subTitle = document.createElement('button');
+    var game;
+    var ctx = canvas.getContext("2d");
+
+    game = new Game({
+        rows: canvas.width / 10,
+        columns: canvas.height / 10,
+        ctx: ctx,
+    }, function (hasDied){
+        if(hasDied){
+            destroyGame();
+            buildGameOver();
+        }
+    } );
+
+
 
     /* Create home screen canvas with start button */
     function buildSplash() {
@@ -32,7 +47,8 @@ function main(){
 
     /* Create game screen */
     function buildGame(){ 
-        var section = document.createElement('section')
+        var section = document.createElement('section');
+
         section.setAttribute("id", "section-game");
         
         canvas.id = "game-screen";
@@ -40,20 +56,15 @@ function main(){
         canvas.height = 500;
         canvas.style.border= "1px solid";
 
+        //ctx.font = "italic 30pt Calibri";
+        //ctx.fillText("Score: ", 100, 100);
+
         section.appendChild(canvas);
-
-        var ctx = canvas.getContext("2d");
-
-        ctx.font = "50px Impact"
-        ctx.fillStyle = "#0099CC";
-        ctx.textAlign = "center";
-        ctx.fillText("Noob Knight", canvas.width/2, canvas.height/2);
-
-        // div.appendChild(canvas);
         document.body.prepend(section);
 
         //Test
         eventKeys();
+        game.start();
         
     }
 
@@ -63,6 +74,7 @@ function main(){
         var element = document.getElementsByTagName('section');
 
         body[0].removeChild(element[0]);
+
     }
 
     /* Create Game Over screen */
@@ -80,6 +92,8 @@ function main(){
 
         restartButton.addEventListener('click', function(){
             destroyGameOver();
+            document.location.reload();
+
             buildSplash();
         });
     }
