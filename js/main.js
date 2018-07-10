@@ -74,7 +74,6 @@ function main(){
         var element = document.getElementsByTagName('section');
 
         body[0].removeChild(element[0]);
-
     }
 
     /* Create Game Over screen */

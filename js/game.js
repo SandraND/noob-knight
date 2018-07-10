@@ -100,7 +100,6 @@ Game.prototype._update = function(){
     this._drawPlayer();
     this._drawEnemy();
     this._drawScore();
-
     this.collision();
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
 
