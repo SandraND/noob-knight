@@ -68,7 +68,7 @@ Game.prototype._drawTreasure = function(){
 }
 
 Game.prototype._generateEnemies = function(){
-    var randomNumber = Math.floor(Math.random() * 5) -3;
+    var randomNumber = Math.floor(Math.random() * 3);
     for(var i = 0; i < randomNumber; i++){
         this.enemies.push(new Enemy());
     }
@@ -243,19 +243,15 @@ Game.prototype._assignControlsToKeys = function(){
     document.onkeydown = function(e){
         switch(e.keyCode){
             case 38: //arrow up
-                //this.player.goUp();
                 this.keyUpPressed = true;
                 break;
             case 40: //arror down
-               //this.player.goDown();
                this.keyDownPressed = true;
                 break;
             case 37: //arror left
-                //this.player.goLeft();
                 this.keyLeftPressed = true;
                 break;
             case 39: //arrow right
-                //this.player.goRight();
                 this.keyRightPressed = true;
                 break;
         }
@@ -263,19 +259,15 @@ Game.prototype._assignControlsToKeys = function(){
     document.onkeyup = function(e){
         switch(e.keyCode){
             case 38: //arrow up
-                //this.player.goUp();
                 this.keyUpPressed = false;
                 break;
             case 40: //arror down
-               //this.player.goDown();
                this.keyDownPressed = false;
                 break;
             case 37: //arror left
-                //this.player.goLeft();
                 this.keyLeftPressed = false;
                 break;
             case 39: //arrow right
-                //this.player.goRight();
                 this.keyRightPressed = false;
                 break;
         }

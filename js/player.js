@@ -28,10 +28,10 @@ Player.prototype.move = function(){
 
 
 Player.prototype.gameEnded = function(){
-    if(this.life <= 0){
+    if(this.life <= 0 || this.score <= -5){
         console.log("DEAD");
         return true;
-    }else if(this.score >= 2){
+    }else if(this.score >= 10){
         console.log("WIN");
         return false;
     }
