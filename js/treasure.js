@@ -1,16 +1,11 @@
 function Treasure(){
-    this.positionX;
-    this.positionY;
+    this.positionX,
+    this.positionY,
+    this.size = 40;
     this.intervalID = undefined;
     this.collisionBolean = false;
     this._spawnTreasure();
 }
-
-/*Treasure.prototype.start = function(){
-    if(!this.intervalID){
-        this.intervalID = setInterval(this.spawn.bind(this), 5000);
-    }
-}*/
 
 Treasure.prototype._spawnTreasure = function(){
     //generate random position

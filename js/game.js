@@ -1,6 +1,5 @@
 function Game(options, cb){
     //this.item = undefined;
-    //this.treasure = undefined;
     this.enemies = [];
     this.treasures = [];
 
@@ -10,7 +9,7 @@ function Game(options, cb){
     this.ctx = options.ctx;
     this.score = 0;
     this.callback = cb;
-    //this.bkGround = new Image();
+    this.bkGround = new Image();
     this.heroImage = new Image();
     this.enemyImage = new Image();
 
@@ -31,7 +30,7 @@ Game.prototype._drawBoard = function(){
             if(this.bgReady){
                 this.ctx.drawImage(this.bkGround, 0, 0);
             }*/
-            this.ctx.fillStyle = "white";
+            this.ctx.fillStyle = "gray";
         }
     }
 
@@ -42,7 +41,7 @@ Game.prototype._drawScore = function(){
     this.ctx.fillStyle = "black";
     this.ctx.fillText(`Score: ${this.score}`, 50, 50);
     this.ctx.fillText(`Life: ${this.player.life}`, 200, 50)
-    this.ctx.fillStyle = "white";
+    this.ctx.fillStyle = "gray";
 
     //this.intervalScore = window.setInterval(this._drawBoard.bind(this), 50);
 
@@ -50,7 +49,7 @@ Game.prototype._drawScore = function(){
 
 Game.prototype._drawPlayer = function(){
     this.ctx.fillStyle = "green";
-    this.ctx.fillRect(this.player.positionX, this.player.positionY, 48, 48);
+    this.ctx.fillRect(this.player.positionX, this.player.positionY, 40, 40);
     
     /*
     this.heroImage.onload = function(){
@@ -66,7 +65,7 @@ Game.prototype._drawEnemy = function(){
     this.ctx.fillStyle = "red";
 
     this.enemies.forEach(function(element){
-        this.ctx.fillRect(element.positionX, element.positionY, 48, 48);
+        this.ctx.fillRect(element.positionX, element.positionY, 40, 40);
         
         /*
         this.enemyImage.onload = function(){
@@ -85,7 +84,7 @@ Game.prototype._drawTreasure = function(){
     this.ctx.fillStyle = "yellow";
 
     this.treasures.forEach(function(element){
-        this.ctx.fillRect(element.positionX, element.positionY, 20, 20);
+        this.ctx.fillRect(element.positionX, element.positionY, 40, 40);
     }.bind(this));
 }
 
@@ -119,32 +118,101 @@ Game.prototype.start = function(){
 Game.prototype.collision = function(){
 
     this.enemies.forEach(function(enemy){
-        if(this.player.positionX >= enemy.positionX 
-            && this.player.positionX <= (enemy.positionX + enemy.size)
-            && this.player.positionY >= enemy.positionY
-            && this.player.positionY <= (enemy.positionY + enemy.size)){
-            if(!enemy.collisionBolean){
-                enemy.collisionBolean = true;
-                this.score--;
-                this.player.life -= 20;
+
+                //colision derecha player
+                if(enemy.positionX <= (this.player.positionX + this.player.size) 
+                && (this.player.positionX + this.player.size) <= (enemy.positionX + enemy.size)){
+                if(enemy.positionY <= this.player.positionY 
+                    && this.player.positionY <= (enemy.positionY + enemy.size)){
+                        if(!enemy.collisionBolean){
+                            enemy.collisionBolean = true;
+                            this.score--;
+                            this.player.life -= 20;
+
+                        }
+                }
+                if(enemy.positionY <= (this.player.positionY + this.player.size)
+                    && (this.player.positionY + this.player.size) <= (enemy.positionY + enemy.size)){
+                        if(!enemy.collisionBolean){
+                            enemy.collisionBolean = true;
+                            this.score--;
+                            this.player.life -= 20;
+
+                        }   
+                }
             }
 
-            console.log("esquina superior izquierda");
-
+        if(this.player.positionX  <= (enemy.positionX + enemy.size) 
+        &&  enemy.positionX <= this.player.positionX){
+            if((this.player.positionY + this.player.size) <= (enemy.positionY + enemy.size) 
+                && enemy.positionY <= (this.player.positionY + this.player.size)){
+                    if(!enemy.collisionBolean){
+                        enemy.collisionBolean = true;
+                        this.score--;
+                        this.player.life -= 20;
+                    }
+            }
+            if((enemy.positionY + enemy.size)>= this.player.positionY
+                && this.player.positionY >= enemy.positionY){
+                    if(!enemy.collisionBolean){
+                        enemy.collisionBolean = true;
+                        this.score--;
+                        this.player.life -= 20;
+                    }   
+            }
         }
-        if((this.player.positionX + this.player.size) >= enemy.positionX 
-            && (this.player.positionX + this.player.size) <= (enemy.positionX + enemy.size)
-            && (this.player.positionY + this.player.size) >= enemy.positionY
-            && (this.player.positionY + this.player.size) <= (enemy.positionY + enemy.size)){
 
-                console.log("esquina superior derecha");
-            if(!enemy.collisionBolean){
-                enemy.collisionBolean = true;
-                this.score--;
-                this.player.life -= 20;
-            }
-        }  
+
+  
     }.bind(this));  
+}
+
+Game.prototype.treasureCollision = function(){
+    this.treasures.forEach(function(treasure, index){
+        //colision derecha player
+        if(treasure.positionX <= (this.player.positionX + this.player.size) 
+            && (this.player.positionX + this.player.size) <= (treasure.positionX + treasure.size)){
+            if(treasure.positionY <= this.player.positionY 
+                && this.player.positionY <= (treasure.positionY + treasure.size)){
+                    if(!treasure.collisionBolean){
+                        treasure.collisionBolean = true;
+                        this.score++;
+                        this.treasures.splice(index, 1);
+                    }
+            }
+            if(treasure.positionY <= (this.player.positionY + this.player.size)
+                && (this.player.positionY + this.player.size) <= (treasure.positionY + treasure.size)){
+                    if(!treasure.collisionBolean){
+                        treasure.collisionBolean = true;
+                        this.score++;
+                        this.treasures.splice(index, 1);
+                    }   
+            }
+        }
+        
+
+        //colision izquierda player
+        if(this.player.positionX  <= (treasure.positionX + treasure.size) 
+            &&  treasure.positionX <= this.player.positionX){
+                if((this.player.positionY + this.player.size) <= (treasure.positionY + treasure.size) 
+                    && treasure.positionY <= (this.player.positionY + this.player.size)){
+                        if(!treasure.collisionBolean){
+                            treasure.collisionBolean = true;
+                            this.score++;
+                            this.treasures.splice(index, 1);
+                        }
+                }
+                if((treasure.positionY + treasure.size)>= this.player.positionY
+                    && this.player.positionY >= treasure.positionY){
+                        if(!treasure.collisionBolean){
+                            treasure.collisionBolean = true;
+                            this.score++;
+                            this.treasures.splice(index, 1);
+                        }   
+                }
+            }
+
+    }.bind(this));
 }
 
 
@@ -157,6 +225,7 @@ Game.prototype._update = function(){
     this._drawScore();
 
     this.collision();
+    this.treasureCollision();
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
 
     

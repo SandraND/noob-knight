@@ -3,7 +3,7 @@ function Enemy(){
     this.positionY = 0,
     this.intervalID = undefined;
     this.life = 100;
-    this.size = 48;
+    this.size = 40;
 
     this.enemyLeft = this.positionX;
     this.enemyRight = this.positionX += this.size;
