@@ -2,6 +2,10 @@ function Treasure(){
     this.positionX,
     this.positionY,
     this.size = 40;
+    this.image = new Image();
+    this.image.src = "img/chest.png";
+    this.heigth = 40;
+    this.width = 40;
     this.intervalID = undefined;
     this.collisionBolean = false;
     this._spawnTreasure();

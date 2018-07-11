@@ -5,7 +5,8 @@ function Player(){
     this.direction = 'up';
     this.life = 100;
     this.score = 0;
-
+    this.image = new Image();
+    this.image.src = "img/playerWalkDown.png";
     
     this.playerLeft = this.positionX;
     this.playerRight = this.positionX += this.size;

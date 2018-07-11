@@ -7,9 +7,34 @@ body{
 div{
     margin-top: 250px;
     text-align: center;
+    
 }
 
 canvas{
     margin-top: 80px;
     margin-left: 380px;
+    border-radius: 20px;
+    font-family: OptimusPrinceps;
+
+}
+
+h1{
+    font-size: 80px;
+    font-family: OptimusPrinceps;
+
+}
+
+button{
+    font-family: OptimusPrinceps;
+    font-size: 28px;
+    border-radius: 28px;
+    padding: 10px;
+    box-shadow: 6px 5px 24px #000000;
+}
+button:hover{
+    font-family: OptimusPrinceps;
+
+    background-color: #000000;
+    border-color: #000000;
+    color: white;
 }

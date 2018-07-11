@@ -4,6 +4,11 @@ function Enemy(){
     this.intervalID = undefined;
     this.life = 100;
     this.size = 40;
+    this.image = new Image();
+    this.image.src = "img/enemyWalk.png";
+    this.width = 40;
+    this.heigth = 40;
+
 
     this.enemyLeft = this.positionX;
     this.enemyRight = this.positionX += this.size;

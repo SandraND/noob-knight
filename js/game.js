@@ -9,8 +9,6 @@ function Game(options, cb, cb2){
     this.ctx = options.ctx;
     this.callback = cb;
     this.bkGround = new Image();
-    this.heroImage = new Image();
-    this.enemyImage = new Image();
 
     this.bgReady = false;
     this.heroReady = false;
@@ -40,7 +38,7 @@ Game.prototype._drawScore = function(){
     this.ctx.font = "italic 30pt Calibri";
     this.ctx.fillStyle = "black";
     this.ctx.fillText(`Score: ${this.player.score}`, 50, 50);
-    this.ctx.fillText(`Life: ${this.player.life}`, 200, 50)
+    this.ctx.fillText(`Life: ${this.player.life}`, 300, 50)
     this.ctx.fillStyle = "gray";
 
     //this.intervalScore = window.setInterval(this._drawBoard.bind(this), 50);
@@ -48,43 +46,23 @@ Game.prototype._drawScore = function(){
 }
 
 Game.prototype._drawPlayer = function(){
-    this.ctx.fillStyle = "green";
-    this.ctx.fillRect(this.player.positionX, this.player.positionY, 40, 40);
-    
-    /*
-    this.heroImage.onload = function(){
-        this.heroReady = true;
-    };
-    this.heroImage.src = "img/playerWalkDown.png";
-    if(this.heroReady){
-        this.ctx.drawImage(this.heroImage, this.player.positionX, this.player.positionY);
-    }*/
+    this.ctx.drawImage(this.player.image, this.player.positionX, this.player.positionY);
 }
 
 Game.prototype._drawEnemy = function(){
-    this.ctx.fillStyle = "red";
 
     this.enemies.forEach(function(element){
-        this.ctx.fillRect(element.positionX, element.positionY, 40, 40);
         
-        /*
-        this.enemyImage.onload = function(){
-            this.enemyReady = true;
-        };
-        this.enemyImage.src = "img/enemyWalk.png";
-        if(this.enemyReady){
-            this.ctx.drawImage(this.enemyImage, this.element.positionX, this.element.positionY);
-        }*/
-        element.start();
+        this.ctx.drawImage(element.image, element.positionX, element.positionY);
+
+    element.start();
     }.bind(this));
 
 }
 
 Game.prototype._drawTreasure = function(){
-    this.ctx.fillStyle = "yellow";
-
     this.treasures.forEach(function(element){
-        this.ctx.fillRect(element.positionX, element.positionY, 40, 40);
+        this.ctx.drawImage(element.image, element.positionX, element.positionY);
     }.bind(this));
 }
 

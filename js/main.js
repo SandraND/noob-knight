@@ -34,7 +34,8 @@ function main(){
 
         title.innerText="Noob Knight";
         subTitle.innerText="Press To Start";
-        div.setAttribute("id", "splash")
+        div.setAttribute("id", "splash");
+        
         div.prepend(title);
         div.appendChild(subTitle);
 
@@ -62,7 +63,7 @@ function main(){
         canvas.id = "game-screen";
         canvas.width = 500;
         canvas.height = 500;
-        canvas.style.border= "1px solid";
+        canvas.style.border= "5px solid";
         canvas.style.background = "url(img/background.png)";
 
         section.appendChild(canvas);
