@@ -11,6 +11,8 @@ function Player(){
     this.playerTop = this.positionY;
     this.playerBottom = this.positionY += this.size;
 
+
+
 }
 
 Player.prototype.move = function(){
@@ -41,6 +43,7 @@ Player.prototype.hasDied = function(){
 
 Player.prototype.goUp = function(){
     this.positionY = this.positionY - 3;
+
     
 }
 

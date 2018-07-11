@@ -7,6 +7,11 @@ function main(){
     var subTitle = document.createElement('button');
     var game;
     var ctx = canvas.getContext("2d");
+    //var bkGround = new Image();
+    var playerWalkUp = new Image();
+
+
+
 
     game = new Game({
         rows: canvas.width / 10,
@@ -55,9 +60,7 @@ function main(){
         canvas.width = 500;
         canvas.height = 500;
         canvas.style.border= "1px solid";
-
-        //ctx.font = "italic 30pt Calibri";
-        //ctx.fillText("Score: ", 100, 100);
+        canvas.style.background = "url(img/background.png)";
 
         section.appendChild(canvas);
         document.body.prepend(section);
