@@ -17,12 +17,15 @@ function main(){
         rows: canvas.width / 10,
         columns: canvas.height / 10,
         ctx: ctx,
-    }, function (hasDied){
-        if(hasDied){
+    }, function (gameEnded){
+        if(gameEnded){
             destroyGame();
             buildGameOver();
+        }else{
+            destroyGame();
+            buildGameWin();
         }
-    } );
+    });
 
 
 
@@ -114,8 +117,10 @@ function main(){
 
         restartButton.addEventListener('click', function(){
             destroyGameWin();
+            document.location.reload();
+
             buildSplash();
-        })
+        });
     }
 
     /* Destroy Game Over screen */

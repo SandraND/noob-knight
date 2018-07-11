@@ -1,13 +1,12 @@
-function Game(options, cb){
+function Game(options, cb, cb2){
     //this.item = undefined;
     this.enemies = [];
     this.treasures = [];
-
+    this.ended = false;
     this.player = new Player(),
     this.rows = options.rows;
     this.columns = options.columns;
     this.ctx = options.ctx;
-    this.score = 0;
     this.callback = cb;
     this.bkGround = new Image();
     this.heroImage = new Image();
@@ -17,6 +16,7 @@ function Game(options, cb){
     this.heroReady = false;
     this.enemyReady = false;
 }
+
 
 Game.prototype._drawBoard = function(){
     for(var columnIndex = 0; columnIndex < this.columns; columnIndex++){
@@ -39,7 +39,7 @@ Game.prototype._drawBoard = function(){
 Game.prototype._drawScore = function(){
     this.ctx.font = "italic 30pt Calibri";
     this.ctx.fillStyle = "black";
-    this.ctx.fillText(`Score: ${this.score}`, 50, 50);
+    this.ctx.fillText(`Score: ${this.player.score}`, 50, 50);
     this.ctx.fillText(`Life: ${this.player.life}`, 200, 50)
     this.ctx.fillStyle = "gray";
 
@@ -107,7 +107,6 @@ Game.prototype.start = function(){
 
     this.intervalEnemies = window.setInterval(this._generateEnemies.bind(this), 1000);
     this.intervalTreasures = window.setInterval(this._generateTreasures.bind(this), 5000);
-    
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
 
 }
@@ -126,7 +125,7 @@ Game.prototype.collision = function(){
                     && this.player.positionY <= (enemy.positionY + enemy.size)){
                         if(!enemy.collisionBolean){
                             enemy.collisionBolean = true;
-                            this.score--;
+                            this.player.score--;
                             this.player.life -= 20;
 
                         }
@@ -135,7 +134,7 @@ Game.prototype.collision = function(){
                     && (this.player.positionY + this.player.size) <= (enemy.positionY + enemy.size)){
                         if(!enemy.collisionBolean){
                             enemy.collisionBolean = true;
-                            this.score--;
+                            this.player.score--;
                             this.player.life -= 20;
 
                         }   
@@ -148,7 +147,7 @@ Game.prototype.collision = function(){
                 && enemy.positionY <= (this.player.positionY + this.player.size)){
                     if(!enemy.collisionBolean){
                         enemy.collisionBolean = true;
-                        this.score--;
+                        this.player.score--;
                         this.player.life -= 20;
                     }
             }
@@ -156,7 +155,7 @@ Game.prototype.collision = function(){
                 && this.player.positionY >= enemy.positionY){
                     if(!enemy.collisionBolean){
                         enemy.collisionBolean = true;
-                        this.score--;
+                        this.player.score--;
                         this.player.life -= 20;
                     }   
             }
@@ -176,7 +175,7 @@ Game.prototype.treasureCollision = function(){
                 && this.player.positionY <= (treasure.positionY + treasure.size)){
                     if(!treasure.collisionBolean){
                         treasure.collisionBolean = true;
-                        this.score++;
+                        this.player.score++;
                         this.treasures.splice(index, 1);
                     }
             }
@@ -184,7 +183,7 @@ Game.prototype.treasureCollision = function(){
                 && (this.player.positionY + this.player.size) <= (treasure.positionY + treasure.size)){
                     if(!treasure.collisionBolean){
                         treasure.collisionBolean = true;
-                        this.score++;
+                        this.player.score++;
                         this.treasures.splice(index, 1);
                     }   
             }
@@ -198,7 +197,7 @@ Game.prototype.treasureCollision = function(){
                     && treasure.positionY <= (this.player.positionY + this.player.size)){
                         if(!treasure.collisionBolean){
                             treasure.collisionBolean = true;
-                            this.score++;
+                            this.player.score++;
                             this.treasures.splice(index, 1);
                         }
                 }
@@ -206,7 +205,7 @@ Game.prototype.treasureCollision = function(){
                     && this.player.positionY >= treasure.positionY){
                         if(!treasure.collisionBolean){
                             treasure.collisionBolean = true;
-                            this.score++;
+                            this.player.score++;
                             this.treasures.splice(index, 1);
                         }   
                 }
@@ -229,13 +228,23 @@ Game.prototype._update = function(){
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
 
     
-    if(this.player.hasDied()){
+    if(this.player.gameEnded()){
         this.callback(true);
-        clearInterval(this.intervalEnemies);
-        clearInterval(this.intervalTreasures);
-        //clearInterval(this.intervalScore);
+        this._clearGame();
+    }else if(this.player.gameEnded() == false){
+        this.callback(false);
+        this._clearGame();
+
     }
 
+
+
+}
+Game.prototype._clearGame = function(){
+    clearInterval(this.intervalEnemies);
+    clearInterval(this.intervalTreasures);
+    clearInterval(this.intervalScore);
+    window.cancelAnimationFrame(this.intervalGame);
 }
 
 Game.prototype._assignControlsToKeys = function(){

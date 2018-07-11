@@ -4,6 +4,7 @@ function Player(){
     this.size = 40;
     this.direction = 'up';
     this.life = 100;
+    this.score = 0;
 
     
     this.playerLeft = this.positionX;
@@ -33,12 +34,16 @@ Player.prototype.move = function(){
 }
 
 
-Player.prototype.hasDied = function(){
+Player.prototype.gameEnded = function(){
     if(this.life <= 0){
         console.log("DEAD");
         return true;
+    }else if(this.score >= 2){
+        console.log("WIN");
+        return false;
     }
 }
+
 
 
 Player.prototype.goUp = function(){
