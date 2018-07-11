@@ -7,14 +7,6 @@ function Player(){
     this.score = 0;
     this.image = new Image();
     this.image.src = "img/playerWalkDown.png";
-    
-    this.playerLeft = this.positionX;
-    this.playerRight = this.positionX += this.size;
-    this.playerTop = this.positionY;
-    this.playerBottom = this.positionY += this.size;
-
-
-
 }
 
 Player.prototype.move = function(){
@@ -49,8 +41,6 @@ Player.prototype.gameEnded = function(){
 
 Player.prototype.goUp = function(){
     this.positionY = this.positionY - 3;
-
-    
 }
 
 Player.prototype.goDown = function(){

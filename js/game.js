@@ -10,9 +10,10 @@ function Game(options, cb, cb2){
     this.callback = cb;
     this.bkGround = new Image();
 
-    this.bgReady = false;
-    this.heroReady = false;
-    this.enemyReady = false;
+    this.keyDownPressed = false;
+    this.keyUpPressed = false;
+    this.keyLeftPressed = false;
+    this.keyRightPressed = false;
 }
 
 
@@ -201,6 +202,19 @@ Game.prototype._update = function(){
     this._drawTreasure();
     this._drawScore();
 
+    if (this.keyDownPressed) {
+       this.player.goDown();
+    }
+    if(this.keyUpPressed){
+        this.player.goUp();
+    }
+    if(this.keyLeftPressed){
+        this.player.goLeft();
+    }
+    if(this.keyRightPressed){
+        this.player.goRight();
+    }
+
     this.collision();
     this.treasureCollision();
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
@@ -229,16 +243,40 @@ Game.prototype._assignControlsToKeys = function(){
     document.onkeydown = function(e){
         switch(e.keyCode){
             case 38: //arrow up
-                this.player.goUp();
+                //this.player.goUp();
+                this.keyUpPressed = true;
                 break;
             case 40: //arror down
-                this.player.goDown();
+               //this.player.goDown();
+               this.keyDownPressed = true;
                 break;
             case 37: //arror left
-                this.player.goLeft();
+                //this.player.goLeft();
+                this.keyLeftPressed = true;
                 break;
             case 39: //arrow right
-                this.player.goRight();
+                //this.player.goRight();
+                this.keyRightPressed = true;
+                break;
+        }
+    }.bind(this);
+    document.onkeyup = function(e){
+        switch(e.keyCode){
+            case 38: //arrow up
+                //this.player.goUp();
+                this.keyUpPressed = false;
+                break;
+            case 40: //arror down
+               //this.player.goDown();
+               this.keyDownPressed = false;
+                break;
+            case 37: //arror left
+                //this.player.goLeft();
+                this.keyLeftPressed = false;
+                break;
+            case 39: //arrow right
+                //this.player.goRight();
+                this.keyRightPressed = false;
                 break;
         }
     }.bind(this);
