@@ -30,13 +30,15 @@ function main(){
 
     /* Create home screen canvas with start button */
     function buildSplash() {
-
+        var infoButton = document.createElement('button');
+        infoButton.innerText="Help";
         title.innerText="Noob Knight";
         subTitle.innerText="Press To Start";
         div.setAttribute("id", "splash");
         
         div.prepend(title);
         div.appendChild(subTitle);
+        div.appendChild(infoButton);
 
         document.body.prepend(div);
 
@@ -44,6 +46,22 @@ function main(){
             destroySplash();
             buildGame();
         });
+
+        infoButton.addEventListener('click', function(){
+            destroySplash();
+            buildHelp();
+        });
+    }
+    function buildHelp(){
+        var div = document.createElement('div');
+        
+        var infoTitle = document.createElement('h1');
+        var text = document.createElement('p');
+
+        div.prepend(infoTitle);
+        div.appendChild(text);
+
+        document.body.prepend(div);
     }
 
     /* Destroy home screen */
@@ -68,8 +86,6 @@ function main(){
         section.appendChild(canvas);
         document.body.prepend(section);
 
-        //Test
-        eventKeys();
         game.start();
         
     }
@@ -84,14 +100,16 @@ function main(){
 
     /* Create Game Over screen */
     function buildGameOver(){
-
+        var img = document.createElement('img');
         var gameOverDiv = document.createElement('div');
         gameOverDiv.setAttribute("id", "gameOverDiv");
-        gameOverDiv.prepend(title);
+        img.setAttribute("id", "you-died-img");
+        img.src = "img/you-died.png";
+        gameOverDiv.prepend(img);
         gameOverDiv.appendChild(restartButton);
         
-        title.innerText = "You Died";
-        restartButton.innerText = "Press to Restart";
+    
+        restartButton.innerText = "Return Home";
 
         document.body.prepend(gameOverDiv);
 
