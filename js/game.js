@@ -47,7 +47,8 @@ Game.prototype._drawScore = function(){
 }
 
 Game.prototype._drawPlayer = function(){
-    this.ctx.drawImage(this.player.image, this.player.positionX, this.player.positionY);
+    this._facing();
+    // this.ctx.drawImage(this.player.image, this.player.positionX, this.player.positionY);
 }
 
 Game.prototype._drawEnemy = function(){
@@ -89,8 +90,6 @@ Game.prototype.start = function(){
     this.intervalGame = window.requestAnimationFrame(this._update.bind(this));
 
 }
-
-
 
 
 Game.prototype.collision = function(){
@@ -204,15 +203,19 @@ Game.prototype._update = function(){
 
     if (this.keyDownPressed) {
        this.player.goDown();
+        
     }
     if(this.keyUpPressed){
         this.player.goUp();
+            
     }
     if(this.keyLeftPressed){
         this.player.goLeft();
+    
     }
     if(this.keyRightPressed){
         this.player.goRight();
+            
     }
 
     this.collision();
@@ -272,4 +275,22 @@ Game.prototype._assignControlsToKeys = function(){
                 break;
         }
     }.bind(this);
+}
+
+Game.prototype._facing = function(){
+    if(this.player.facing === 'down'){
+        this.ctx.drawImage(this.player.image, this.player.positionX, this.player.positionY);
+
+    }
+    if(this.player.facing === 'up'){
+        this.ctx.drawImage(this.player.imageUp, this.player.positionX, this.player.positionY);
+
+    }
+    if(this.player.facing === 'right'){
+        this.ctx.drawImage(this.player.imageRight, this.player.positionX, this.player.positionY);
+    }
+    if(this.player.facing === 'left'){
+        this.ctx.drawImage(this.player.imageLeft, this.player.positionX, this.player.positionY);
+
+    }
 }
