@@ -54,21 +54,43 @@ function main(){
     }
     function buildHelp(){
         var div = document.createElement('div');
-        
+        var button = document.createElement('button');
         var infoTitle = document.createElement('h1');
         var text = document.createElement('p');
 
+        div.setAttribute("id", "help-screen");
+        button.setAttribute("id", "help-button");
+
+        button.innerText = "Return Home Screen";
+        infoTitle.innerText = "How to play";
+        text.innerText = "To win the game you need to collect 10 treasures. \n If your life reaches 0, or your score goes below 0, \n you will lose the game! \n \n Use the arrows to move the Hero!";
+
         div.prepend(infoTitle);
         div.appendChild(text);
+        div.appendChild(button);
 
         document.body.prepend(div);
+
+        button.addEventListener('click', function(){
+            destroyHelp();
+            buildSplash();
+        });
     }
 
     /* Destroy home screen */
     function destroySplash(){
-        var splash = document.getElementById("splash")
+        var splash = document.getElementById("splash");
         var body = document.getElementsByTagName("body");
         body[0].removeChild(splash);
+    }
+
+    function destroyHelp(){
+        var div = document.getElementsByTagName("div");
+        var body = document.getElementsByTagName("body");
+
+        body[0].removeChild(div[0]);
+        document.location.reload();
+
     }
 
     /* Create game screen */

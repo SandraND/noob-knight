@@ -55,3 +55,8 @@ button:hover{
     border-color: #000000;
     color: white;
 }
+
+p{
+    font-size: 3rem;
+    color: white;
+}
