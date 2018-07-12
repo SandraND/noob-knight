@@ -1,4 +1,4 @@
-function Game(options, cb, cb2){
+function Game(options, cb){
     //this.item = undefined;
     this.enemies = [];
     this.treasures = [];
@@ -48,7 +48,6 @@ Game.prototype._drawScore = function(){
 
 Game.prototype._drawPlayer = function(){
     this._facing();
-    // this.ctx.drawImage(this.player.image, this.player.positionX, this.player.positionY);
 }
 
 Game.prototype._drawEnemy = function(){

@@ -7,7 +7,6 @@ function main(){
     var subTitle = document.createElement('button');
     var game;
     var ctx = canvas.getContext("2d");
-    //var bkGround = new Image();
     var playerWalkUp = new Image();
 
 
